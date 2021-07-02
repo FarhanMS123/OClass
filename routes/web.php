@@ -22,3 +22,7 @@ Route::prefix('/debug')->group(function(){
         return view($view);
     });
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
