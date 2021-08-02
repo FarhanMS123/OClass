@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("login");
 });
+
+/**
+ * GET /profile
+ * GET /class/{id?}
+ * GET /materials
+ * GET /classes
+ * GET /members
+ */
 
 Route::get('/dashboard', function () {
     return view('dashboard');
