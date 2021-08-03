@@ -23,6 +23,7 @@ Route::get('/', function () {
  * GET /materials
  * GET /classes
  * GET /members
+ * hehe
  */
 
 Route::get('/dashboard', function () {

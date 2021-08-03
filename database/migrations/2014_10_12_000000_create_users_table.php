@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        //
+        // chg 2
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
