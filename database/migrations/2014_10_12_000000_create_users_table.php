@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        //
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -21,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->set('user_type', ['member', 'praetorian', 'admin']);
-            $table->foreignId('room_id')->nullable();
+            $table->foreignId('room_id')->nullable()->useCurrent();
 
             $table->timestamp('email_verified_at')->nullable()->useCurrent();
             $table->rememberToken();
