@@ -45,7 +45,13 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $isEmail = filter_var($this->email, FILTER_VALIDATE_EMAIL);
+        $cred = ["password" => $this->password];
+
+        if($isEmail) $cred["email"] = $this->email;
+        else $cred["bncc_id"] = $this->email;
+
+        if (! Auth::attempt($cred, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

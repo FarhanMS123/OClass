@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('photo')->nullable();
-            $table->string('bncc_id');
+            $table->string('bncc_id')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->set('user_type', ['member', 'praetorian', 'admin']);
+            $table->set('user_type', ['member', 'praetorian', 'admin'])->default('member');
             $table->foreignId('room_id')->nullable()->useCurrent();
 
             $table->timestamp('email_verified_at')->nullable()->useCurrent();

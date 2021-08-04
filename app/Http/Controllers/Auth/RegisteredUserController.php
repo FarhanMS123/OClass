@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\Room;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $rooms = Room::all();
+        return view('auth.register', compact('rooms'));
     }
 
     /**
@@ -35,14 +37,18 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'bncc_id' => 'required|string|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'room_id' => 'required'
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'bncc_id' => $request->bncc_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'room_id' => 'required'
         ]);
 
         event(new Registered($user));
