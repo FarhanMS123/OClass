@@ -21,7 +21,8 @@
         </div>
         <hr class="h-2 mx-10 my-4 flex md:hidden" style="background-color: #6085B2;">
         <div class="w-full md:w-1/2 px-10 lg:px-16">
-            <form class="flex flex-col" action="" name="registerForm" id="registerForm">
+            <form class="flex flex-col" action="{{route('register')}}" method="POST" enctype="application/x-www-form-urlencoded" name="registerForm" id="registerForm">
+                @csrf
                 <label class="text-md lg:text-xl xl:text-2xl" for="fullname">Full Name</label>
                 <input required class="mt-2 mb-4 px-4 py-2" type="text" name="name" id="fullname" placeholder="Full Name">
                 <label class="text-md lg:text-xl xl:text-2xl" for="username">BNCC ID</label>

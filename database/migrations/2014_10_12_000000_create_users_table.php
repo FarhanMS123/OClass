@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->set('user_type', ['member', 'praetorian', 'admin'])->default('member');
-            $table->foreignId('room_id')->nullable()->useCurrent();
+            $table->foreignId('room_id')->nullable();
 
             $table->timestamp('email_verified_at')->nullable()->useCurrent();
             $table->rememberToken();

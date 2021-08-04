@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdapterController;
+// use App\Http\Controllers\MemberController;
+// use App\Http\Controllers\PraetorianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +29,8 @@ Route::get('/', function () {
  * hehe
  */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/class', [AdapterController::class, 'class'])->name('class');
+});
 
 require __DIR__.'/auth.php';
