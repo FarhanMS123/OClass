@@ -33,7 +33,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/class', [AdapterController::class, 'class'])->name('class');
     Route::get('/profile', [AdapterController::class, 'profile'])->name('profile');
     Route::get('/material', [AdapterController::class, 'material'])->name('material');
-    Route::get('/post/{id?}', [AdapterController::class, 'post'])->name('material');
+    Route::get('/post/{id?}', [AdapterController::class, 'post'])->name('post');
+    Route::post('/post/{id?}', [AdapterController::class, 'addPost']);
+    Route::delete('/post/{id}', [AdapterController::class, 'deletePost']);
 });
 
 require __DIR__.'/auth.php';

@@ -81,7 +81,7 @@
                                     <path style="fill:#D8A852;" d="M23.315,2.52C22.979,1.937,22.534,1.43,22,1.025C21.162,0.391,20.13,0,19,0c-2.757,0-5,2.243-5,5h2c0-1.654,1.346-3,3-3c0.624,0,1.204,0.192,1.685,0.52C21.478,3.061,22,3.97,22,5c0,1.654-1.346,3-3,3c-0.553,0-1,0.447-1,1s0.447,1,1,1c2.757,0,5-2.243,5-5C24,4.093,23.739,3.254,23.315,2.52z"></path>
                                 </svg>
                             </span>
-                            <a href="../html/Material.html" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-3">Material</a>
+                            <a href="{{route('material')}}" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-3">Material</a>
                             <span class="u-icon u-icon-circle u-icon-3">
                                 <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 58 58" style="">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1465"></use>
@@ -100,7 +100,7 @@
                                     <polygon style="fill:#CEC9AE;" points="38,5 38,19 52,19 "></polygon>
                                 </svg>
                             </span>
-                            <a href="#" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-4">Logout</a>
+                            <a href="#" onclick="logout();" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-4">Logout</a>
                             <span class="u-icon u-icon-circle u-text-black u-icon-4">
                                 <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 492.5 492.5" style="">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9c12"></use>
@@ -123,7 +123,7 @@
                                 <div class="gambar"></div>
                                 <div class="detail">
                                     <h3>{{$room->name}}</h3>
-                                    <h5>{{$praetorian ? $praetorian->name : '[Praetorian is Not Available]'}}</h5>
+                                    <h5>{{$praetorian ? $praetorian[0]->name : '[Praetorian is Not Available]'}}</h5>
                                 </div>
                             </div>
                             <br>
@@ -138,6 +138,16 @@
         <div class="u-align-left u-clearfix u-sheet u-sheet-1"></div>
     </footer>
     <section class="u-backlink u-clearfix u-grey-80"></section>
+
+    <form id="frmLogout" action="{{route('logout')}}" method="POST" enctype="application/x-www-form-urlencoded">
+        @csrf
+    </form>
+
+    <script>
+        function logout(){
+            frmLogout.submit();
+        }
+    </script>
 </body>
 
 </html>

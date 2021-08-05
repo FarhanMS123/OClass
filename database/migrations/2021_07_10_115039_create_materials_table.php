@@ -15,7 +15,7 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->set('material_type', ['embed', 'video', 'image', 'text']);
+            $table->set('material_type', ['embed', 'video', 'image', 'text'])->nullable();
             $table->string('embed')->nullable();
             $table->integer('session');
             $table->string('session_name');

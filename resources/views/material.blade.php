@@ -2,7 +2,7 @@
 <html style="font-size: 16px;">
 
 <head>
-    <title>Profile</title>
+    <title>Material | OClass Official Learning Website</title>
     <link rel="stylesheet" href="{{asset('css/main.css')}}" media="screen">
     <link rel="stylesheet" href="{{asset('css/Material.css')}}" media="screen">
     <script src="{{asset('js/Modal.js');}}"></script>
@@ -28,9 +28,9 @@
                             <br /> <br />
                             <div class="gambar2"></div>
 
-                            <h3 class="u-align-center u-text u-text-1">Username2</h3>
+                            <h3 class="u-align-center u-text u-text-1">{{$user->name}}</h3>
 
-                            <a href="../html/Profile.html"
+                            <a href="{{route('profile')}}"
                                 class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-1">Profile</a>
                             <span class="u-icon u-icon-circle u-text-palette-1-base u-icon-1">
                                 <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53"
@@ -48,7 +48,7 @@
                                     </g>
                                 </svg>
                             </span>
-                            <a href="../html/Class.html" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-2">Class</a>
+                            <a href="{{route('class')}}" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-2">Class</a>
                             <span class="u-icon u-icon-circle u-icon-2">
                                 <svg class="u-svg-link"
                                     preserveAspectRatio="xMidYMin slice" viewBox="0 0 56 56" style="">
@@ -111,7 +111,7 @@
                                     </path>
                                 </svg>
                             </span>
-                            <a href="../html/Material.html" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-2 u-btn-3">Material</a>
+                            <a href="{{route('material')}}" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-2 u-btn-3">Material</a>
                             <span class="u-icon u-icon-circle u-icon-3">
                                 <svg class="u-svg-link"
                                     preserveAspectRatio="xMidYMin slice" viewBox="0 0 58 58" style="">
@@ -142,7 +142,7 @@
                                     <polygon style="fill:#CEC9AE;" points="38,5 38,19 52,19 "></polygon>
                                 </svg>
                             </span>
-                            <a href="../html/login.html" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-4">Logout</a>
+                            <a href="#" onclick="logout();" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-4">Logout</a>
                             <span class="u-icon u-icon-circle u-text-black u-icon-4">
                                 <svg class="u-svg-link"
                                     preserveAspectRatio="xMidYMin slice" viewBox="0 0 492.5 492.5" style="">
@@ -164,38 +164,40 @@
                     <div class="u-container-style u-layout-cell u-right-cell u-size-45 u-layout-cell-2" src="">
                         <div class="u-container-layout u-container-layout-2">
 
+                            @if($user->user_type == "praetorian")
                             <div class="w-full flex flex-row-reverse pr-12">
-                                <a href="#" class="px-4 py-2 rounded-md bg-blue-400 text-white hover:text-white">Add Material</a>
+                                <a href="{{route('post')}}" class="px-4 py-2 rounded-md bg-blue-400 text-white hover:text-white">Add Material</a>
                             </div>
+                            @endif
 
                             <div class="w-full flex flex-wrap">
 
-                                @for($i=0; $i<5; $i++)
+                                @foreach($materials as $material)
                                 <div style="width:calc(50% - 2rem);" class="bg-white rounded-xl border-gray-300 border border-solid overflow-hidden mr-4 my-4">
+                                    @if($material->embed)
                                     <div class="w-100">
-                                        <img class="u-expanded-width u-image u-image-default u-image-3"
-                                        src="../images/00b6b09c967cd219113072feb026b7fcf7a02b4a4e4fc4835763183ca0986441a2460e2f26a016d1facdd87b99a76510a3b34900bca4c36122ee83_1280.jpg"
-                                        alt="" data-image-width="1280" data-image-height="851">
+                                        <iframe src="{{$material->embed}}" class="border-none w-full" style="height: 16rem;"></iframe>
                                     </div>
+                                    @endif
                                     <div class="p-4">
-                                        <div class="text-sm text-gray-400">Session 1 - 26 Juli 2021</div>
-                                        <div class="font-bold">Integrate Android using Firebase</div>
+                                        <div class="text-sm text-gray-400">Session {{$material->session}} - {{$material->formated_SessionDate()}}</div>
+                                        <div class="font-bold">{{$material->session_name}}</div>
                                         <div style="max-height: 12rem;" class="overflow-x-hidden overflow-y-auto">
-                                            <p>Lorem impsum dolor sit amet:</p>
-                                            <ul>
-                                                <li>Outline 1</li>
-                                                <li>Outline 2</li>
-                                                <li>Outline 3</li>
-                                            </ul>
-                                            <p>Lorem lipsum dolor sit amet meta herum lo rens.</p>
+                                            {!! $material->formated_content() !!}
                                         </div>
-                                        <div class="flex flex-row-reverse">
-                                            <a href="#" class="text-red-500 hover:text-red-500 py-2 px-2">Delete</a>
-                                            <a href="#" class="text-blue-600 hover:text-blue-600 py-2 px-2">Edit Post</a>
-                                        </div>
+                                        @if($user->user_type == "praetorian")
+                                        <form action="{{route('post', $material->id)}}" method="POST" enctype="application/x-www-form-urlencoded">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="flex flex-row-reverse">
+                                                <button type="submit" class="text-red-500 hover:text-red-500 py-2 px-2 bg-transparent">Delete</button>
+                                                <a href="{{route('post', $material->id)}}" class="text-blue-600 hover:text-blue-600 py-2 px-2">Edit Post</a>
+                                            </div>
+                                        </form>
+                                        @endif
                                     </div>
                                 </div>
-                                @endfor
+                                @endforeach
 
                             </div>
                         </div>
@@ -211,6 +213,16 @@
     </footer>
     <section class="u-backlink u-clearfix u-grey-80">
     </section>
+
+    <form id="frmLogout" action="{{route('logout')}}" method="POST" enctype="application/x-www-form-urlencoded">
+        @csrf
+    </form>
+
+    <script>
+        function logout(){
+            frmLogout.submit();
+        }
+    </script>
 </body>
 
 </html>

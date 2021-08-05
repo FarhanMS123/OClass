@@ -25,10 +25,54 @@ class AdapterController extends Controller
     }
 
     public function material(Request $request){
-        return view('material');
+        $user = $request->user();
+        $materials = Material::where('room_id', $user->room_id)->get();
+        return view('material', compact('user', 'materials'));
     }
 
     public function post(Request $request, $id=null){
-        return view('post');
+        if($request->user()->user_type == 'member') return back();
+
+        $material = null;
+        if($id) $material = Material::findOrFail($id);
+
+        return view('post', compact('id', 'material'));
+    }
+
+    public function addPost(Request $request, $id=null){
+        if($request->user()->user_type == 'member') return back();
+
+        $request->validate([
+            'session' => "required",
+            'session_date' => "required",
+            'session_name' => "required",
+            'content' => "required"
+        ]);
+
+        if($id) Material::findOrFail($id)
+                    ->update([
+                        'embed' => $request->embed,
+                        'session' => $request->session,
+                        'session_date' => $request->session_date,
+                        'session_name' => $request->session_name,
+                        'content' => $request->content
+                    ]);
+        else Material::create([
+                'embed' => $request->embed,
+                'session' => $request->session,
+                'session_date' => $request->session_date,
+                'session_name' => $request->session_name,
+                'content' => $request->content,
+                'room_id' => $request->user()->room->id
+            ]);
+
+        return redirect()->route("material");
+    }
+
+    public function deletePost(Request $request, $id){
+        if($request->user()->user_type == 'member') return back();
+
+        Material::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

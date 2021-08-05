@@ -21,7 +21,8 @@ class User extends Authenticatable
         'email',
         'ocm_id',
         'password',
-        'room_id'
+        'room_id',
+        'user_type'
     ];
 
     /**
