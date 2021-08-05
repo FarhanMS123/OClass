@@ -2,7 +2,7 @@
 <html style="font-size: 16px;">
 
 <head>
-    <title>class</title>
+    <title>Class | OClass Official Learning Website</title>
     <link rel="stylesheet" href="{{asset('css/main.css')}}" media="screen">
     <link rel="stylesheet" href="{{asset('css/class.css')}}" media="screen">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
@@ -22,7 +22,7 @@
                             <div class="gambar2"></div>
 
                             <h3 class="u-align-center u-text u-text-1">{{$user->name}}</h3>
-                            <a href="../html/Profile.html" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-1">Profile</a>
+                            <a href="{{route('profile')}}" class="u-border-none u-btn u-button-style u-custom-color-1 u-hover-custom-color-2 u-btn-1">Profile</a>
                             <span class="u-icon u-icon-circle u-text-palette-1-base u-icon-1">
                                 <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 53 53" style="">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-a243"></use>
@@ -34,7 +34,7 @@
                                     </g>
                                 </svg>
                             </span>
-                            <a href="../html/Class.html" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-2 u-btn-2">Class</a>
+                            <a href="{{route('class')}}" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-2 u-btn-2">Class</a>
                             <span class="u-icon u-icon-circle u-icon-2">
                                 <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 56 56" style="">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-7425"></use>

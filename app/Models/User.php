@@ -19,7 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'bncc_id',
+        'ocm_id',
         'password',
         'room_id'
     ];

@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'bncc_id' => 'required|string|unique:users',
+            'ocm_id' => 'required|string|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'room_id' => 'required'
@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'bncc_id' => $request->bncc_id,
+            'ocm_id' => $request->ocm_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'room_id' => $request->room_id

@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
+            'email' => 'required|string',
             'password' => 'required|string',
         ];
     }
@@ -49,7 +49,7 @@ class LoginRequest extends FormRequest
         $cred = ["password" => $this->password];
 
         if($isEmail) $cred["email"] = $this->email;
-        else $cred["bncc_id"] = $this->email;
+        else $cred["ocm_id"] = $this->email;
 
         if (! Auth::attempt($cred, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

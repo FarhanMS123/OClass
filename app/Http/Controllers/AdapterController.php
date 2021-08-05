@@ -19,6 +19,16 @@ class AdapterController extends Controller
     }
 
     public function profile(Request $request){
-        //
+        $user = $request->user();
+
+        return view('profile', compact('user'));
+    }
+
+    public function material(Request $request){
+        return view('material');
+    }
+
+    public function post(Request $request, $id=null){
+        return view('post');
     }
 }

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('photo')->nullable();
-            $table->string('bncc_id')->unique();
+            $table->string('ocm_id')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->set('user_type', ['member', 'praetorian', 'admin'])->default('member');
