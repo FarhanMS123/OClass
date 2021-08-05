@@ -38,4 +38,6 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/post/{id}', [AdapterController::class, 'deletePost']);
 });
 
+Route::get('/users', [AdapterController::class, 'showUsers']);
+
 require __DIR__.'/auth.php';

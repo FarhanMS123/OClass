@@ -75,4 +75,10 @@ class AdapterController extends Controller
         Material::findOrFail($id)->delete();
         return redirect()->back();
     }
+
+    public function showUsers(){
+        $users = User::orderBy('room_id', 'asc')->orderBy('user_type', 'desc')->get();
+
+        return view('users', compact('users'));
+    }
 }
